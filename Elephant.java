@@ -2,6 +2,25 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Elephant extends Actor
 {
+    GreenfootImage[] images;
+    
+    public Elephant()
+    {
+        images = new GreenfootImage[8];
+        for(int i = 0; i < images.length; i++){
+            images[i] = new GreenfootImage("images/elephant_idle/idle" + i + ".png");
+        }
+        setImage(images[4]);
+    }
+    
+    int curIndex = 0;
+    void animate()
+    {
+        setImage(images[curIndex]);
+        curIndex++;
+        curIndex %= 8;
+    }
+    
     public void act()
     {
         // Add your action code here.
@@ -14,6 +33,8 @@ public class Elephant extends Actor
         if(Greenfoot.isKeyDown("space")){
             turn(2);
         }
+        
+        animate();
         
         // Eat the apple
         if(isTouching(Apple.class)){
